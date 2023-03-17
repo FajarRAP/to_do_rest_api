@@ -54,7 +54,7 @@ class _TambahToDoState extends State<TambahToDo> {
             height: 20,
           ),
           ElevatedButton(
-            onPressed: createData,
+            onPressed: (isEdit) ? updateData : createData,
             child: (isEdit) ? const Text("Sunting") : const Text("Tambah"),
           ),
         ]),
@@ -70,11 +70,13 @@ class _TambahToDoState extends State<TambahToDo> {
       "description": deskripsi,
       "is_completed": false,
     };
-    final response = await http.post(Uri.parse("http://api.nstack.in/v1/todos"),
-        body: jsonEncode(body),
-        headers: {
-          "Content-Type": "application/json",
-        });
+    final response = await http.post(
+      Uri.parse("http://api.nstack.in/v1/todos"),
+      body: jsonEncode(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
     if (response.statusCode == 201) {
       _tugas.text = "";
       _deskripsi.text = "";
@@ -97,7 +99,42 @@ class _TambahToDoState extends State<TambahToDo> {
   }
 
   Future<void> updateData() async {
-    
+    final id = widget.tugas!["_id"];
+    if (id == null) {
+      print("ID invalid");
+      return;
+    }
+    final String tugas = _tugas.text;
+    final String deskripsi = _deskripsi.text;
+    final Map<String, dynamic> body = {
+      "title": tugas,
+      "description": deskripsi,
+      "is_completed": false,
+    };
+    final response = await http.put(
+      Uri.parse("http://api.nstack.in/v1/todos/$id"),
+      body: jsonEncode(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+    if (response.statusCode == 200) {
+      tampilPesan(const SnackBar(
+        content: Text(
+          "Tugas berhasil disunting",
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+      ));
+    } else {
+      tampilPesan(const SnackBar(
+        content: Text(
+          "Tugas gagal disunting",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      ));
+    }
   }
 
   void tampilPesan(SnackBar pesan) {

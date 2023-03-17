@@ -67,13 +67,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void navigasiCreateData() {
+  Future<void> navigasiCreateData() async {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const TambahToDo(),
       ),
     );
+    readData();
   }
 
   Future<void> readData() async {
@@ -111,12 +112,13 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void navigasiUpdateData(Map tugas) {
-    Navigator.push(
+  Future<void> navigasiUpdateData(Map tugas) async {
+    await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => TambahToDo(tugas: tugas),
         ));
+    readData();
   }
 
   void tampilPesan(SnackBar pesan) {

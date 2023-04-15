@@ -20,4 +20,3 @@ samples, guidance on mobile development, and a full API reference.
  cara untuk build apk dengan perintah " flutter build apk "
  untuk optimalisasi agar sizenya kecil saya masih belum bahan
  biasanya file hasil generate ,berada di folder build
- 

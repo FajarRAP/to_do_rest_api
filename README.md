@@ -14,3 +14,10 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+#abdul kodir
+ cara untuk build apk dengan perintah " flutter build apk "
+ untuk optimalisasi agar sizenya kecil saya masih belum bahan
+ biasanya file hasil generate ,berada di folder build
+ 

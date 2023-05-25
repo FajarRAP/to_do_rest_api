@@ -35,32 +35,35 @@ class _HomePageState extends State<HomePage> {
         onRefresh: readData,
         child: ListView.builder(
             itemCount: listToDo.length,
+            padding: const EdgeInsets.all(12),
             itemBuilder: (context, index) {
-              return ListTile(
-                leading: CircleAvatar(child: Text("${index + 1}")),
-                title: Text(listToDo[index]["title"]),
-                subtitle: Text(listToDo[index]["description"]),
-                trailing: PopupMenuButton(onSelected: (value) {
-                  if (value == "sunting") {
-                    //edit
-                    navigasiUpdateData(listToDo[index]);
-                  }
-                  if (value == "hapus") {
-                    //hapus
-                    deleteData(listToDo[index]["_id"]);
-                  }
-                }, itemBuilder: (context) {
-                  return [
-                    const PopupMenuItem(
-                      value: "sunting",
-                      child: Text("Sunting"),
-                    ),
-                    const PopupMenuItem(
-                      value: "hapus",
-                      child: Text("Hapus"),
-                    )
-                  ];
-                }),
+              return Card(
+                child: ListTile(
+                  leading: CircleAvatar(child: Text("${index + 1}")),
+                  title: Text(listToDo[index]["title"]),
+                  subtitle: Text(listToDo[index]["description"]),
+                  trailing: PopupMenuButton(onSelected: (value) {
+                    if (value == "sunting") {
+                      //edit
+                      navigasiUpdateData(listToDo[index]);
+                    }
+                    if (value == "hapus") {
+                      //hapus
+                      deleteData(listToDo[index]["_id"]);
+                    }
+                  }, itemBuilder: (context) {
+                    return [
+                      const PopupMenuItem(
+                        value: "sunting",
+                        child: Text("Sunting"),
+                      ),
+                      const PopupMenuItem(
+                        value: "hapus",
+                        child: Text("Hapus"),
+                      )
+                    ];
+                  }),
+                ),
               );
             }),
       ),
@@ -86,9 +89,6 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         listToDo = hasil;
       });
-      print("Sukses");
-    } else {
-      print("gagal");
     }
   }
 
